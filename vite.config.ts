@@ -9,6 +9,7 @@ import pack from './package.json' with { type: 'json' };
 const DEFAULT_NODE_VERSION = 'v22.10.0';
 const nodeVersion = process.version ?? DEFAULT_NODE_VERSION;
 const homepage = pack.homepage?.trim();
+const allowed_hosts = pack.allowedHosts ?? [];
 
 /* eslint-disable-next-line no-restricted-exports */
 export default defineConfig({
@@ -32,6 +33,7 @@ export default defineConfig({
       // Do not watch test files or generated files, avoiding the dev server to constantly reload when not needed
       ignored: ['**/.idea/**', '**/.git/**', '**/build/**', '**/coverage/**', '**/test/**'],
     },
+    allowedHosts: allowed_hosts,
   },
 
   base: !homepage ? undefined : homepage, // Not using just homepage because empty string should be discarded
